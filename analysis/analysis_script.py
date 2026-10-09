@@ -8,3 +8,9 @@ from shared import tem_chromatin_analyzer as TCA
 
 TCA.process_folder("../QuPath/Sample 1", "../processed/2026-09-25 Dev/Sample 1")
 TCA.process_folder("../QuPath/Sample 2", "../processed/2026-09-25 Dev/Sample 2")
+
+TCA.process_folder("../QuPath/Sample 1", "../processed/2026-09-25 Dev/Sample 1")
+TCA.process_folder("../QuPath/Sample 2", "../processed/2026-09-25 Dev/Sample 2")
+
+TCA.process_folder("../QuPath/Sample 1", "../processed/2026-09-25 Dev/Sample 1")
+TCA.process_folder("../QuPath/Sample 2", "../processed/2026-09-25 Dev/Sample 2")
