@@ -245,3 +245,19 @@ def get_image_uri_from_qupath_project(qpproj_path):
                 image_uri_dict[image_name_clean] = local_filepath
 
     return image_uri_dict
+
+
+def combine_csv_files(output_folder):
+
+    # Find the summary CSVs
+    output_folder = Path(output_folder)
+
+    list_csv_files = list(output_folder.rglob("summary_data.csv"))
+
+    with pd.ExcelWriter(
+        output_folder / "combined_data.xlsx", engine="openpyxl"
+    ) as writer:
+        for f in list_csv_files:
+            df = pd.read_csv(f)
+
+            df.to_excel(writer, sheet_name=(f.parent).stem, index=False)
