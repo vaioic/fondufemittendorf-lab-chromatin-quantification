@@ -49,7 +49,9 @@ def process_folder(source_dir, output_dir, **kwargs):
     df.to_csv(output_dir / "summary_data.csv", index=False)
 
 
-def process_image(filepath, maskpath, output_dir, radius=25, write_csv=True):
+def process_image(
+    filepath, maskpath, output_dir, radius=25, mpp=(20 / 1650), write_csv=True
+):
 
     filepath = Path(filepath)
 
@@ -105,15 +107,17 @@ def process_image(filepath, maskpath, output_dir, radius=25, write_csv=True):
     )
     props_ring = skimage.measure.regionprops(mask_nucl_ring.astype(np.uint8))
 
-    data["hchromatin_area"] = props_hchromatin[0].area
-    data["ring_area"] = props_ring[0].area
+    data["hchromatin_area"] = props_hchromatin[0].area * (mpp**2)
+    data["ring_area"] = props_ring[0].area * (mpp**2)
     data["average_hchromatin_area"] = data["hchromatin_area"] / data["ring_area"]
 
     # -- Nuclear properties --
     props_nucleus = skimage.measure.regionprops(mask_nucl.astype(np.uint8))
 
-    data["nuclear_area"] = props_nucleus[0].area
-    data["nuclear_equiv_diameter_area"] = props_nucleus[0].equivalent_diameter_area
+    data["nuclear_area"] = props_nucleus[0].area * (mpp**2)
+    data["nuclear_equiv_diameter_area"] = (
+        props_nucleus[0].equivalent_diameter_area * mpp
+    )
     data["nuclear_eccentricity"] = props_nucleus[0].eccentricity
 
     data["nuclear_circularity"] = (4 * np.pi * props_nucleus[0].area) / (
@@ -123,7 +127,7 @@ def process_image(filepath, maskpath, output_dir, radius=25, write_csv=True):
     data["nuclear_solidity"] = props_nucleus[0].solidity
 
     hull_mask = props_nucleus[0].image_convex.astype(np.uint8)
-    hull_perimeter = skimage.measure.perimeter(hull_mask)
+    hull_perimeter = skimage.measure.perimeter(hull_mask) * mpp
     data["nuclear_tortuosity"] = hull_perimeter / props_nucleus[0].perimeter
 
     # ---Save data---

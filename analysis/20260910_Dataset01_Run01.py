@@ -6,14 +6,14 @@
 #     "../processed/2026-09-24 Dev",
 # )
 
-TCA.process_folder("../QuPath/Sample 1", "../processed/2026-10-09/Sample 1")
-TCA.process_folder("../QuPath/Sample 2", "../processed/2026-10-09/Sample 2")
+# TCA.process_folder("../QuPath/Sample 1", "../processed/2026-10-09/Sample 1")
+# TCA.process_folder("../QuPath/Sample 2", "../processed/2026-10-09/Sample 2")
 
-TCA.process_folder("../QuPath/Sample 3", "../processed/2026-10-09/Sample 3")
-TCA.process_folder("../QuPath/Sample 4", "../processed/2026-10-09/Sample 4")
+# TCA.process_folder("../QuPath/Sample 3", "../processed/2026-10-09/Sample 3")
+# TCA.process_folder("../QuPath/Sample 4", "../processed/2026-10-09/Sample 4")
 
-TCA.process_folder("../QuPath/Sample 5", "../processed/2026-10-09/Sample 5")
-TCA.process_folder("../QuPath/Sample 6", "../processed/2026-10-09/Sample 6")
+# TCA.process_folder("../QuPath/Sample 5", "../processed/2026-10-09/Sample 5")
+# TCA.process_folder("../QuPath/Sample 6", "../processed/2026-10-09/Sample 6")
 
 
 # Make plots
@@ -83,21 +83,21 @@ if len(properties) < len(axes):
 plt.tight_layout()
 plt.show()
 
-# Option B (Optional): Save individual high-resolution plots per property
-output_dir = Path("./boxplots_output")
-output_dir.mkdir(exist_ok=True)
+# # Option B (Optional): Save individual high-resolution plots per property
+# output_dir = Path("./boxplots_output")
+# output_dir.mkdir(exist_ok=True)
 
-for prop in properties:
-    plt.figure(figsize=(8, 6))
-    sns.boxplot(data=df_all, x="sample", y=prop, palette="Set2")
-    # Overlay jittered data points for better visibility of distributions
-    sns.stripplot(
-        data=df_all, x="sample", y=prop, color="black", alpha=0.3, jitter=0.2, size=4
-    )
-    plt.title(f"{prop.replace('_', ' ').title()} by Sample", fontsize=14)
-    plt.xlabel("Sample", fontsize=12)
-    plt.ylabel(prop, fontsize=12)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.savefig(output_dir / f"boxplot_{prop}.png", dpi=300)
-    plt.close()
+# for prop in properties:
+#     plt.figure(figsize=(8, 6))
+#     sns.boxplot(data=df_all, x="sample", y=prop, palette="Set2")
+#     # Overlay jittered data points for better visibility of distributions
+#     sns.stripplot(
+#         data=df_all, x="sample", y=prop, color="black", alpha=0.3, jitter=0.2, size=4
+#     )
+#     plt.title(f"{prop.replace('_', ' ').title()} by Sample", fontsize=14)
+#     plt.xlabel("Sample", fontsize=12)
+#     plt.ylabel(prop, fontsize=12)
+#     plt.xticks(rotation=45)
+#     plt.tight_layout()
+#     plt.savefig(output_dir / f"boxplot_{prop}.png", dpi=300)
+#     plt.close()
